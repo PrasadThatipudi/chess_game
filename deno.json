@@ -1,0 +1,9 @@
+{
+  "tasks": {},
+  "lint": {
+    "rules": {
+      "tags": ["recommended"]
+    }
+  },
+  "imports": {}
+}

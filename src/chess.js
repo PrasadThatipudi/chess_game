@@ -14,27 +14,38 @@ class Chess {
     this.#board = this.#instantiatePieces(boardTemplate);
   }
 
+  #splitOn(list, threshold) {
+    const splitIndex = list.indexOf(threshold);
+
+    const groups = [list.slice(0, splitIndex), list.slice(splitIndex + 1)];
+    return groups;
+  }
+
+  #combine(list1, list2) {
+    const minList = debug(list1.length < list2.length ? list1 : list2);
+    const combinedList = [];
+
+    for (const index in minList) {
+      combinedList.push([list1.at(index), list2.at(index)]);
+    }
+
+    return combinedList;
+  }
+
   diagonal(piecePosition) {
     const { column, row } = piecePosition;
 
     const colIds = ["A", "B", "C", "D", "E", "F", "G", "H"];
     const rowIds = _.range(1, 9).map(String);
 
-    const possiblePositions = new Set();
+    // const possiblePositions = new Set();
 
-    const colGroup1 = colIds.slice(colIds.indexOf(column) + 1);
-    const rowGroup1 = rowIds.slice(rowIds.indexOf(row) + 1);
+    const [colGroup1, colGroup2] = debug(this.#splitOn(colIds, column));
+    const [rowGroup1, rowGroup2] = this.#splitOn(rowIds, row);
 
-    for (const index in colGroup1) {
-      const possiblePosition = {
-        column: colGroup1.at(index),
-        row: rowGroup1.at(index),
-      };
+    const combinations = this.#combine(colGroup2, rowGroup2);
 
-      possiblePositions.add(possiblePosition);
-    }
-
-    return possiblePositions;
+    return new Set(combinations.map(([column, row]) => ({ column, row })));
   }
 
   #instantiatePieces(boardTemplate) {

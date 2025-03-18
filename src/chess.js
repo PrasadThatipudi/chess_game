@@ -1,18 +1,23 @@
 import { Piece } from "./piece.js";
 
-const debug = function (arg) {
-  console.log(arg);
-  return arg;
-};
-
 const templateFile = "./src/board_template.json";
 
 const boardTemplate = JSON.parse(Deno.readTextFileSync(templateFile));
 
-console.log(boardTemplate);
+const instantiatePieces = (boardTemplate) => {
+  const board = {};
 
-Object.entries(boardTemplate).map(([_, colValues]) =>
-  Object.entries(colValues).map(([_, pieceInfo]) =>
-    debug(new Piece(...debug(pieceInfo)).position)
-  )
-);
+  Object.entries(boardTemplate).forEach(([rowId, rowValues]) => {
+    const row = {};
+
+    Object.entries(rowValues).forEach(([columnId, pieceInfo]) => {
+      row[columnId] = new Piece(pieceInfo);
+    });
+
+    board[rowId] = row;
+  });
+
+  return board;
+};
+
+instantiatePieces(boardTemplate);

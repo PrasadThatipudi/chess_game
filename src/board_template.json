@@ -2,10 +2,41 @@
   "1": {
     "A": ["rook", "white", { "column": "A", "row": "1" }],
     "B": ["knight", "white", { "column": "B", "row": "1" }],
-    "C": ["bishop", "white", { "column": "C", "row": "1" }]
+    "C": ["bishop", "white", { "column": "C", "row": "1" }],
+    "D": ["queen", "white", { "column": "D", "row": "1" }],
+    "E": ["king", "white", { "column": "E", "row": "1" }],
+    "F": ["bishop", "white", { "column": "F", "row": "1" }],
+    "G": ["knight", "white", { "column": "G", "row": "1" }],
+    "H": ["rook", "white", { "column": "H", "row": "1" }]
   },
   "2": {
     "A": ["pawn", "white", { "column": "A", "row": "2" }],
-    "B": ["pawn", "white", { "column": "B", "row": "2" }]
+    "B": ["pawn", "white", { "column": "B", "row": "2" }],
+    "C": ["pawn", "white", { "column": "C", "row": "2" }],
+    "D": ["pawn", "white", { "column": "D", "row": "2" }],
+    "E": ["pawn", "white", { "column": "E", "row": "2" }],
+    "F": ["pawn", "white", { "column": "F", "row": "2" }],
+    "G": ["pawn", "white", { "column": "G", "row": "2" }],
+    "H": ["pawn", "white", { "column": "H", "row": "2" }]
+  },
+  "7": {
+    "A": ["pawn", "black", { "column": "A", "row": "7" }],
+    "B": ["pawn", "black", { "column": "B", "row": "7" }],
+    "C": ["pawn", "black", { "column": "C", "row": "7" }],
+    "D": ["pawn", "black", { "column": "D", "row": "7" }],
+    "E": ["pawn", "black", { "column": "E", "row": "7" }],
+    "F": ["pawn", "black", { "column": "F", "row": "7" }],
+    "G": ["pawn", "black", { "column": "G", "row": "7" }],
+    "H": ["pawn", "black", { "column": "H", "row": "7" }]
+  },
+  "8": {
+    "A": ["rook", "black", { "column": "A", "row": "8" }],
+    "B": ["knight", "black", { "column": "B", "row": "8" }],
+    "C": ["bishop", "black", { "column": "C", "row": "8" }],
+    "D": ["queen", "black", { "column": "D", "row": "8" }],
+    "E": ["king", "black", { "column": "E", "row": "8" }],
+    "F": ["bishop", "black", { "column": "F", "row": "8" }],
+    "G": ["knight", "black", { "column": "G", "row": "8" }],
+    "H": ["rook", "black", { "column": "H", "row": "8" }]
   }
 }

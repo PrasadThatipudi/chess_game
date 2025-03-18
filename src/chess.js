@@ -2,11 +2,6 @@ import { Piece } from "./piece.js";
 import _ from "lodash";
 // import boardTemplate from "./board_template.json" with { type: "json" };
 
-const debug = function (arg) {
-  console.log(arg);
-  return arg;
-};
-
 class Chess {
   #board;
 
@@ -22,7 +17,7 @@ class Chess {
   }
 
   #combine(list1, list2) {
-    const minList = debug(list1.length < list2.length ? list1 : list2);
+    const minList = list1.length < list2.length ? list1 : list2;
     const combinedList = [];
 
     for (const index in minList) {
@@ -38,14 +33,15 @@ class Chess {
     const colIds = ["A", "B", "C", "D", "E", "F", "G", "H"];
     const rowIds = _.range(1, 9).map(String);
 
-    // const possiblePositions = new Set();
+    const colGroups = this.#splitOn(colIds, column);
+    const rowGroups = this.#splitOn(rowIds, row);
 
-    const [colGroup1, colGroup2] = debug(this.#splitOn(colIds, column));
-    const [rowGroup1, rowGroup2] = this.#splitOn(rowIds, row);
+    const combinations = colGroups.flatMap((_, index) =>
+      this.#combine(colGroups.at(index), rowGroups.at(index))
+    );
 
-    const combinations = this.#combine(colGroup2, rowGroup2);
-
-    return new Set(combinations.map(([column, row]) => ({ column, row })));
+    const possibles = combinations.map(([column, row]) => ({ column, row }));
+    return new Set(possibles);
   }
 
   #instantiatePieces(boardTemplate) {

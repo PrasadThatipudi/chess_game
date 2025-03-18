@@ -1,0 +1,11 @@
+{
+  "1": {
+    "A": ["rook", "white", { "column": "A", "row": "1" }],
+    "B": ["knight", "white", { "column": "B", "row": "1" }],
+    "C": ["bishop", "white", { "column": "C", "row": "1" }]
+  },
+  "2": {
+    "A": ["pawn", "white", { "column": "A", "row": "2" }],
+    "B": ["pawn", "white", { "column": "B", "row": "2" }]
+  }
+}

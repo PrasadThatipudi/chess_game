@@ -3,27 +3,27 @@ class Piece {
   #color;
   #position;
 
-  constructor (type, color, position) {
+  constructor(type, color, position) {
     this.#type = type;
     this.#color = color;
     this.#position = position;
   }
 
-  get type () {
+  get type() {
     return this.#type;
   }
 
-  get color () {
+  get color() {
     return this.#color;
   }
 
-  get position () {
+  get position() {
     return this.#position;
   }
 
-  set position (newPosition) {
+  set position(newPosition) {
     this.#position = newPosition;
   }
 }
 
-export {Piece};
+export { Piece };

@@ -11,7 +11,7 @@ const instantiatePieces = (boardTemplate) => {
     const row = {};
 
     Object.entries(rowValues).forEach(([columnId, pieceInfo]) => {
-      row[columnId] = new Piece(pieceInfo);
+      row[columnId] = new Piece(...pieceInfo);
     });
 
     board[rowId] = row;
@@ -20,4 +20,4 @@ const instantiatePieces = (boardTemplate) => {
   return board;
 };
 
-instantiatePieces(boardTemplate);
+console.log(instantiatePieces(boardTemplate));

@@ -24,5 +24,26 @@ describe("diagonal", () => {
 
       assertEquals(chess.diagonal(piecePosition), expected);
     });
+
+    it("when piece is at middle of row 1", () => {
+      const board_template = {
+        1: { A: ["bishop", "white", { column: "D", row: "1" }] },
+      };
+      const possiblePositions = [
+        { column: "A", row: "4" },
+        { column: "B", row: "3" },
+        { column: "C", row: "2" },
+        { column: "E", row: "2" },
+        { column: "F", row: "3" },
+        { column: "G", row: "4" },
+        { column: "H", row: "5" },
+      ];
+
+      const piecePosition = { column: "D", row: "1" };
+      const expected = new Set(possiblePositions);
+      const chess = new Chess(board_template);
+
+      assertEquals(chess.diagonal(piecePosition), expected);
+    });
   });
 });

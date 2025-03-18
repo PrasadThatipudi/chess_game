@@ -2,6 +2,11 @@ import { Piece } from "./piece.js";
 import _ from "lodash";
 // import boardTemplate from "./board_template.json" with { type: "json" };
 
+const debug = function (arg) {
+  console.log(arg);
+  return arg;
+};
+
 class Chess {
   #board;
 
@@ -27,6 +32,26 @@ class Chess {
     return combinedList;
   }
 
+  #combinations(rowGroups, colGroups) {
+    const combinations = rowGroups.flatMap((_, index) =>
+      this.#combine(colGroups.at(index), rowGroups.at(index))
+    );
+
+    const reverseOfRowGroup = rowGroups.toReversed();
+
+    const reverseCombinations = reverseOfRowGroup.flatMap((_, index) =>
+      this.#combine(colGroups.at(index), reverseOfRowGroup.at(index))
+    );
+
+    combinations.push(...reverseCombinations);
+
+    const possibles = combinations.map(([column, row]) => ({
+      column,
+      row,
+    }));
+    return new Set(possibles);
+  }
+
   diagonal(piecePosition) {
     const { column, row } = piecePosition;
 
@@ -36,12 +61,7 @@ class Chess {
     const colGroups = this.#splitOn(colIds, column);
     const rowGroups = this.#splitOn(rowIds, row);
 
-    const combinations = colGroups.flatMap((_, index) =>
-      this.#combine(colGroups.at(index), rowGroups.at(index))
-    );
-
-    const possibles = combinations.map(([column, row]) => ({ column, row }));
-    return new Set(possibles);
+    return this.#combinations(rowGroups, colGroups);
   }
 
   #instantiatePieces(boardTemplate) {

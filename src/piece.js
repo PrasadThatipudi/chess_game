@@ -17,12 +17,12 @@ class Piece {
     return this.#color;
   }
 
-  get position() {
-    return this.#position;
-  }
-
   set position(newPosition) {
     this.#position = newPosition;
+  }
+
+  get position() {
+    return this.#position;
   }
 }
 

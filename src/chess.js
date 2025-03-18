@@ -1,23 +1,29 @@
 import { Piece } from "./piece.js";
+import _ from "lodash";
+import boardTemplate from "./board_template.json" with { type: "json" };
 
-const templateFile = "./src/board_template.json";
+class Chess {
+  #board;
 
-const boardTemplate = JSON.parse(Deno.readTextFileSync(templateFile));
+  constructor() {
+    this.#board = this.#instantiatePieces(boardTemplate);
+  }
 
-const instantiatePieces = (boardTemplate) => {
-  const board = {};
+  #instantiatePieces(boardTemplate) {
+    const board = {};
 
-  Object.entries(boardTemplate).forEach(([rowId, rowValues]) => {
-    const row = {};
+    _.forEach(boardTemplate, (rowValues, rowId) => {
+      const row = {};
 
-    Object.entries(rowValues).forEach(([columnId, pieceInfo]) => {
-      row[columnId] = new Piece(...pieceInfo);
+      _.forEach(rowValues, (pieceInfo, columnId) => {
+        row[columnId] = new Piece(...pieceInfo);
+      });
+
+      board[rowId] = row;
     });
 
-    board[rowId] = row;
-  });
+    return board;
+  }
+}
 
-  return board;
-};
-
-console.log(instantiatePieces(boardTemplate));
+export { Chess };

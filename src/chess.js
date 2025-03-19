@@ -40,7 +40,10 @@ class Chess {
     const reverseOfRowGroup = rowGroups.toReversed();
 
     const reverseCombinations = reverseOfRowGroup.flatMap((_, index) =>
-      this.#combine(colGroups.at(index), reverseOfRowGroup.at(index))
+      this.#combine(
+        colGroups.at(index).toReversed(),
+        reverseOfRowGroup.at(index)
+      )
     );
 
     combinations.push(...reverseCombinations);

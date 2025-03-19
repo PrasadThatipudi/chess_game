@@ -29,11 +29,7 @@ const combinations = (rowGroups, colGroups) => {
 
   combinations.push(...reverseCombinations);
 
-  const possibles = combinations.map(([column, row]) => ({
-    column,
-    row,
-  }));
-  return new Set(possibles);
+  return combinations;
 };
 
 export { combinations, splitOn };

@@ -3,11 +3,6 @@ import _ from "lodash";
 import { combinations, splitOn } from "./util.js";
 // import boardTemplate from "./board_template.json" with { type: "json" };
 
-const debug = function (arg) {
-  console.log(arg);
-  return arg;
-};
-
 class Chess {
   #board;
 
@@ -24,7 +19,10 @@ class Chess {
     const colGroups = splitOn(colIds, column);
     const rowGroups = splitOn(rowIds, row);
 
-    return combinations(rowGroups, colGroups);
+    const allCombinations = combinations(rowGroups, colGroups);
+    const possibles = allCombinations.map(([column, row]) => ({ column, row }));
+
+    return new Set(possibles);
   }
 
   #instantiatePieces(boardTemplate) {

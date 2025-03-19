@@ -1,5 +1,6 @@
 import { Piece } from "./piece.js";
 import _ from "lodash";
+import { combinations, splitOn } from "./util.js";
 // import boardTemplate from "./board_template.json" with { type: "json" };
 
 const debug = function (arg) {
@@ -14,57 +15,16 @@ class Chess {
     this.#board = this.#instantiatePieces(boardTemplate);
   }
 
-  #splitOn(list, threshold) {
-    const splitIndex = list.indexOf(threshold);
-
-    const groups = [list.slice(0, splitIndex), list.slice(splitIndex + 1)];
-    return groups;
-  }
-
-  #combine(list1, list2) {
-    const minList = list1.length < list2.length ? list1 : list2;
-    const combinedList = [];
-
-    for (const index in minList) {
-      combinedList.push([list1.at(index), list2.at(index)]);
-    }
-
-    return combinedList;
-  }
-
-  #combinations(rowGroups, colGroups) {
-    const combinations = rowGroups.flatMap((_, index) =>
-      this.#combine(colGroups.at(index), rowGroups.at(index))
-    );
-
-    const reverseOfRowGroup = rowGroups.toReversed();
-
-    const reverseCombinations = reverseOfRowGroup.flatMap((_, index) =>
-      this.#combine(
-        colGroups.at(index).toReversed(),
-        reverseOfRowGroup.at(index)
-      )
-    );
-
-    combinations.push(...reverseCombinations);
-
-    const possibles = combinations.map(([column, row]) => ({
-      column,
-      row,
-    }));
-    return new Set(possibles);
-  }
-
   diagonal(piecePosition) {
     const { column, row } = piecePosition;
 
     const colIds = ["A", "B", "C", "D", "E", "F", "G", "H"];
     const rowIds = _.range(1, 9).map(String);
 
-    const colGroups = this.#splitOn(colIds, column);
-    const rowGroups = this.#splitOn(rowIds, row);
+    const colGroups = splitOn(colIds, column);
+    const rowGroups = splitOn(rowIds, row);
 
-    return this.#combinations(rowGroups, colGroups);
+    return combinations(rowGroups, colGroups);
   }
 
   #instantiatePieces(boardTemplate) {

@@ -5,15 +5,16 @@ const splitOn = (list, threshold) => {
   return groups;
 };
 
+const shortestList = (lists) =>
+  lists.reduce(
+    (list, short) => (list.length < short.length ? list : short),
+    lists.at(0)
+  );
+
 const combine = (list1, list2) => {
-  const minList = list1.length < list2.length ? list1 : list2;
-  const combinedList = [];
+  const minList = shortestList([list1, list2]);
 
-  for (const index in minList) {
-    combinedList.push([list1.at(index), list2.at(index)]);
-  }
-
-  return combinedList;
+  return minList.map((_, index) => [list1.at(index), list2.at(index)]);
 };
 
 const combinations = (rowGroups, colGroups) => {
@@ -21,10 +22,10 @@ const combinations = (rowGroups, colGroups) => {
     combine(colGroups.at(index), rowGroups.at(index))
   );
 
-  const reverseOfRowGroup = rowGroups.toReversed();
+  const reverseOfColGroup = colGroups.toReversed();
 
-  const reverseCombinations = reverseOfRowGroup.flatMap((_, index) =>
-    combine(colGroups.at(index).toReversed(), reverseOfRowGroup.at(index))
+  const reverseCombinations = reverseOfColGroup.flatMap((_, index) =>
+    combine(reverseOfColGroup.at(index), rowGroups.at(index).toReversed())
   );
 
   combinations.push(...reverseCombinations);

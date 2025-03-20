@@ -3,6 +3,11 @@ import _ from "lodash";
 import { combinations, splitOn } from "./util.js";
 // import boardTemplate from "./board_template.json" with { type: "json" };
 
+const debug = function (arg) {
+  console.log(arg);
+  return arg;
+};
+
 class Chess {
   #board;
 
